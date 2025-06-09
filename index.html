@@ -3,173 +3,1035 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nature's Touch Landscaping</title>
-    <link rel="icon" type="image/x-icon" href="NaturesTouchLogo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Nature's Touch - Professional Landscaping Services</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo span {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #22c55e;
+        }
+
+        .btn {
+            background: #16a34a;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: 2px solid #22c55e;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #15803d;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+
+        .btn-outline:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: #22c55e;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1604.jpg-Tj8sDepr9aY2XflHetr8cM0WOIdlZZ.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 64rem;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #d1d5db;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .chevron-down {
+            width: 2rem;
+            height: 2rem;
+            color: #22c55e;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40%, 43% {
+                transform: translateX(-50%) translateY(-30px);
+            }
+            70% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+            90% {
+                transform: translateX(-50%) translateY(-4px);
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 6rem;
+            height: 0.25rem;
+            background: #22c55e;
+            margin: 1.5rem auto;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: #111827;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Services */
+        .services {
+            background: linear-gradient(to bottom, #000, #111827);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .service-card:hover {
+            border-color: rgba(34, 197, 94, 0.5);
+            transform: scale(1.05);
+        }
+
+        .service-icon {
+            width: 2rem;
+            height: 2rem;
+            color: #22c55e;
+            margin: 0 auto 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            color: #d1d5db;
+        }
+
+        /* Gallery */
+        .gallery {
+            background: #111827;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-badge {
+            background: #16a34a;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        /* Photo Popup */
+        .photo-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: #1f2937;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background: #ef4444;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: #dc2626;
+            transform: scale(1.1);
+        }
+
+        .popup-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        .popup-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .popup-nav:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .popup-prev {
+            left: -60px;
+        }
+
+        .popup-next {
+            right: -60px;
+        }
+
+        .popup-counter {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(to top, #000, #111827);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .contact-icon {
+            width: 2rem;
+            height: 2rem;
+            color: #22c55e;
+            margin: 0 auto 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: #d1d5db;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            border-top: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-logo img {
+            width: 32px;
+            height: 32px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-text {
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.25rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .popup-nav {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen bg-black text-white">
-    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-green-500/20">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="#" class="flex items-center space-x-2">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5283.png-JZ1ngMJvNIJbMhddUULWxkR6lIEiGg.jpeg" alt="Nature's Touch Logo" class="w-10 h-10">
-                <span class="text-xl font-semibold text-green-400">Nature's Touch</span>
-            </a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#services" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
-                <a href="#about" class="text-gray-300 hover:text-green-400 transition-colors">About</a>
-                <a href="#portfolio" class="text-gray-300 hover:text-green-400 transition-colors">Portfolio</a>
-                <a href="#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
-            </nav>
-            <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Get Quote</button>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NaturesTouchlogo-RATt4ENSNxycGE5zieGdfTkIDsTavh.png" alt="Nature's Touch Logo">
+                    <span>Nature's Touch</span>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="request-form.html" class="btn">Book Now</a></li>
+                </ul>
+
+                <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+
+                <div class="mobile-menu" id="mobile-menu">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#contact" class="btn">Book Now</a>
+                </div>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="pt-16">
-        <!-- Hero Section -->
-        <section class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="https://blog.gardenloversclub.com/wp-content/uploads/2015/10/shutterstock_212939869.jpg" alt="Landscaping Background" class="object-cover w-full h-full opacity-50">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NaturesTouchlogo-RATt4ENSNxycGE5zieGdfTkIDsTavh.png" alt="Nature's Touch Logo" class="hero-logo">
+            <h1>Nature's Touch</h1>
+            <p>Professional Landscaping Services That Bring Your Vision to Life</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-lg">Get Free Quote</a>
+                <a href="#gallery" class="btn btn-outline btn-lg">View Our Work</a>
             </div>
-            <div class="container mx-auto px-4 z-10 text-center">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-green-400">Transform Your Outdoor Space</h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
-                    Professional landscaping services that bring your vision to life with nature's touch
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#portfolio" class="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-4 rounded inline-block">View Our Work</a>
-                    <a href="#contact" class="border border-green-500 text-green-400 hover:bg-green-500/10 text-lg px-8 py-4 rounded inline-block">Free Consultation</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg class="chevron-down" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>About Nature's Touch</h2>
+                <p>Transforming outdoor spaces with passion, expertise, and dedication to excellence.</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text slide-in-left">
+                    <h3>Our Story</h3>
+                    <p>
+                        Founded with a passion for creating beautiful outdoor spaces, Nature's Touch has been serving the community for over half a decade. We believe that every property has the potential to become a stunning landscape that enhances both beauty and functionality.
+                    </p>
+                    <p>
+                        Our team of experienced professionals combines traditional landscaping techniques with modern innovations to deliver exceptional results. From small residential gardens to large commercial properties, we approach every project with the same level of dedication and attention to detail.
+                    </p>
+                    <p>
+                        We pride ourselves on building lasting relationships with our clients, understanding their vision, and bringing it to life while respecting both their budget and timeline.
+                    </p>
+                    <a href="about.html" class="btn btn-lg" style="margin-top: 1rem;">Read More</a>
                 </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="py-20 bg-black/95">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-16 text-green-400">Our Services</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-gray-900 border border-green-500/20 p-6 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-4 text-green-400">Landscape Tasks</h3>
-                        <p class="text-gray-400 mb-4">We offer a many services during the year. One of which is leaf removal and we also offer powerwashing, Mowing, etc.</p>
-                        <a href="#contact" class="text-green-400 hover:text-green-500 inline-flex items-center">
-                            Learn more
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="bg-gray-900 border border-green-500/20 p-6 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-4 text-green-400">Regular Service</h3>
-                        <p class="text-gray-400 mb-4">Regular maintenance services to keep your garden looking beautiful throughout the seasons.</p>
-                        <a href="#contact" class="text-green-400 hover:text-green-500 inline-flex items-center">
-                            Learn more
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="bg-gray-900 border border-green-500/20 p-6 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-4 text-green-400">Hardscape Installation</h3>
-                        <p class="text-gray-400 mb-4">Professional installation of patioss, and other hardscape features.</p>
-                        <a href="#contact" class="text-green-400 hover:text-green-500 inline-flex items-center">
-                            Learn more
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
+                <div class="about-image slide-in-right">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1604.jpg-Tj8sDepr9aY2XflHetr8cM0WOIdlZZ.jpeg" alt="Beautiful landscaped garden">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-gradient-to-b from-black to-gray-900">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-16 text-green-400">Get A Quote</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <svg class="w-6 h-6 text-green-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2">Location</h3>
-                                <p class="text-gray-400">Springfield, VA 22153</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <svg class="w-6 h-6 text-green-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                            </svg>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2">Phone</h3>
-                                <p class="text-gray-400">(571) 423-6031</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <svg class="w-6 h-6 text-green-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2">Email</h3>
-                                <p class="text-gray-400">antonio.manuel.juarez@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <svg class="w-6 h-6 text-green-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2">Hours</h3>
-                                <p class="text-gray-400">Monday - Friday: 4:40pm - 6pm</p>
-                                <p class="text-gray-400">Saturday - Sunday: 9am - 4pm</p>
-                            </div>
-                        </div>
-                    </div>
-                    <form action="mailto:antonio.manuel.juarez@gmail.com" method="post" enctype="text/plain" class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
-                            </div>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Send Message</button>
-                    </form>
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Services</h2>
+                <p>From routine maintenance to complete landscape transformations, we provide comprehensive services to enhance your outdoor space.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card scale-in">
+                    <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M19 10a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3>Lawn Maintenance</h3>
+                    <p>Professional mowing, edging, and lawn care services to keep your grass pristine year-round.</p>
+                </div>
+
+                <div class="service-card scale-in">
+                    <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                    <h3>Tree & Shrub Care</h3>
+                    <p>Expert pruning, trimming, and maintenance for healthy, beautiful trees and shrubs.</p>
+                </div>
+
+                <div class="service-card scale-in">
+                    <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3V1m0 18v2m8-10a4 4 0 00-4-4H7"></path>
+                    </svg>
+                    <h3>Garden Maintenance</h3>
+                    <p>Keep your garden looking beautiful all year around.</p>
+                </div>
+
+                <div class="service-card scale-in">
+                    <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                    <h3>Seasonal Cleanup</h3>
+                    <p>Comprehensive seasonal services including leaf removal, mulching, and property preparation.</p>
+                </div>
+
+                <div class="service-card scale-in">
+                    <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                    <h3>Junk Removal</h3>
+                    <p>Professional removal of yard debris, old landscaping materials, and unwanted indoor & outdoor items.</p>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="bg-black border-t border-green-500/20 py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center mb-4 md:mb-0">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5283.png-JZ1ngMJvNIJbMhddUULWxkR6lIEiGg.jpeg" alt="Nature's Touch Logo" class="w-8 h-8 mr-2">
-                    <span class="text-green-400 font-semibold">Nature's Touch</span>
+    <!-- Gallery Section -->
+    <section id="gallery" class="section gallery">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Work</h2>
+                <p>See the transformation we bring to outdoor spaces across the community.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item scale-in" onclick="openPhotoPopup(0)">
+                    <img src="IMG_0352.jpg" alt="Landscaping work 1">
+                    <div class="gallery-overlay">
+                        <span class="gallery-badge">View Photos</span>
+                    </div>
                 </div>
-                <div class="text-gray-400 text-sm">
-                    © <span id="current-year"></span> Nature's Touch
+
+                <div class="gallery-item scale-in" onclick="openPhotoPopup(1)">
+                    <img src="IMG_0818.jpg" alt="Landscaping work 2">
+                    <div class="gallery-overlay">
+                        <span class="gallery-badge">View Photos</span>
+                    </div>
                 </div>
+
+                <div class="gallery-item scale-in" onclick="openPhotoPopup(2)">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1543.jpg-HSIDlSCnAgxutKD4Eeg16gXwYboUqn.jpeg" alt="Landscaping work 3">
+                    <div class="gallery-overlay">
+                        <span class="gallery-badge">View Photos</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item scale-in" onclick="openPhotoPopup(3)">
+                    <img src="IMG_0935.jpg" alt="Landscaping work 4">
+                    <div class="gallery-overlay">
+                        <span class="gallery-badge">View Photos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Get In Touch</h2>
+                <p>Ready to transform your outdoor space? Contact us today for a free consultation and quote.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card slide-in-left">
+                    <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                    <h3>Call Us</h3>
+                    <p>(571) 407-1232</p>
+                </div>
+
+                <div class="contact-card fade-in">
+                    <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <h3>Email Us</h3>
+                    <p>williampopp2021@gmail.com</p>
+                </div>
+
+                <div class="contact-card slide-in-right">
+                    <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <h3>Location</h3>
+                    <p>Springfield<br>Virginia</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;" class="fade-in">
+                <a href="request-form.html" class="btn btn-lg" style="padding: 1rem 3rem; font-size: 1.25rem;">Get Free Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NaturesTouchlogo-RATt4ENSNxycGE5zieGdfTkIDsTavh.png" alt="Nature's Touch Logo">
+                    <span style="font-size: 1.125rem; font-weight: 600;">Nature's Touch</span>
+                </div>
+                <p class="footer-text">© 2024 Nature's Touch Landscaping. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Photo Popup -->
+    <div id="photo-popup" class="photo-popup">
+        <div class="popup-container">
+            <button class="popup-close" onclick="closePhotoPopup()">×</button>
+            <button class="popup-nav popup-prev" onclick="prevPhoto()">‹</button>
+            <img id="popup-image" src="/placeholder.svg" alt="" class="popup-image">
+            <button class="popup-nav popup-next" onclick="nextPhoto()">›</button>
+            <div class="popup-counter">
+                <span id="current-photo">1</span> / <span id="total-photos">4</span>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = mobileMenu.classList.contains('active') ? '×' : '☰';
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Photo popup functionality
+        const photos = [
+            'IMG_0352.jpg',
+            'IMG_0818.jpg',
+            'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1543.jpg-HSIDlSCnAgxutKD4Eeg16gXwYboUqn.jpeg',
+            'IMG_0935.jpg'
+        ];
+        //https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1537.jpg-xUhc0TOlJkHcivzwWqRtxx7laZwUDh.jpeg
+        let currentPhotoIndex = 0;
+
+        function openPhotoPopup(index) {
+            currentPhotoIndex = index;
+            const popup = document.getElementById('photo-popup');
+            const popupImg = document.getElementById('popup-image');
+            const currentPhotoSpan = document.getElementById('current-photo');
+            
+            popupImg.src = photos[currentPhotoIndex];
+            currentPhotoSpan.textContent = currentPhotoIndex + 1;
+            popup.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePhotoPopup() {
+            const popup = document.getElementById('photo-popup');
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextPhoto() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const popupImg = document.getElementById('popup-image');
+            const currentPhotoSpan = document.getElementById('current-photo');
+            
+            popupImg.src = photos[currentPhotoIndex];
+            currentPhotoSpan.textContent = currentPhotoIndex + 1;
+        }
+
+        function prevPhoto() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            const popupImg = document.getElementById('popup-image');
+            const currentPhotoSpan = document.getElementById('current-photo');
+            
+            popupImg.src = photos[currentPhotoIndex];
+            currentPhotoSpan.textContent = currentPhotoIndex + 1;
+        }
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePhotoPopup();
+            } else if (e.key === 'ArrowRight') {
+                nextPhoto();
+            } else if (e.key === 'ArrowLeft') {
+                prevPhoto();
+            }
+        });
+
+        // Close popup when clicking outside the container
+        document.getElementById('photo-popup').addEventListener('click', (e) => {
+            if (e.target.id === 'photo-popup') {
+                closePhotoPopup();
+            }
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
     </script>
 </body>
 </html>

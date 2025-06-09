@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Service - Nature's Touch Landscaping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo span {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #22c55e;
+        }
+
+        .btn {
+            background: #16a34a;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: 2px solid #22c55e;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: #15803d;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 4rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1604.jpg-Tj8sDepr9aY2XflHetr8cM0WOIdlZZ.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: #22c55e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #16a34a;
+        }
+
+        /* Form Styles */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 1rem;
+            padding: 3rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #22c55e;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #22c55e;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #1f2937;
+            color: #fff;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        /* Success Popup */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background: #1f2937;
+            border: 2px solid #22c55e;
+            border-radius: 1rem;
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 1rem;
+            position: relative;
+        }
+
+        .popup-icon {
+            width: 4rem;
+            height: 4rem;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .popup-icon svg {
+            width: 2rem;
+            height: 2rem;
+            color: #000;
+        }
+
+        .popup-content h2 {
+            color: #22c55e;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .popup-content p {
+            color: #d1d5db;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        .popup-close {
+            background: #22c55e;
+            color: #000;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: #16a34a;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading .submit-btn {
+            background: #6b7280;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-container {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .popup-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NaturesTouchlogo-RATt4ENSNxycGE5zieGdfTkIDsTavh.png" alt="Nature's Touch Logo">
+                    <span>Nature's Touch</span>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="request-form.html" class="btn">Request Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Request Service</h1>
+            <p>Fill out the form below and we'll get back to you as soon as possible with a personalized quote.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <a href="index.html" class="back-btn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to Home
+            </a>
+
+            <div class="form-container">
+                <form id="service-request-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="address">Property Address <span class="required">*</span></label>
+                            <input type="text" id="address" name="address" placeholder="Street Address, City, State, ZIP" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="service">Service Needed <span class="required">*</span></label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service...</option>
+                                <option value="Lawn Maintenance">Lawn Maintenance</option>
+                                <option value="Tree & Shrub Care">Tree & Shrub Care</option>
+                                <option value="Garden Design">Garden Design & Installation</option>
+                                <option value="Seasonal Cleanup">Seasonal Cleanup</option>
+                                <option value="Junk Removal">Junk Removal</option>
+                                <option value="Hardscaping">Hardscaping</option>
+                                <option value="Irrigation">Irrigation Systems</option>
+                                <option value="Multiple Services">Multiple Services</option>
+                                <option value="Other">Other (please specify in details)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="details">Project Details</label>
+                            <textarea id="details" name="details" placeholder="Please describe your project, timeline, budget range, or any specific requirements..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="timeline">Preferred Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select timeline...</option>
+                                <option value="ASAP">As soon as possible</option>
+                                <option value="Within 1 week">Within 1 week</option>
+                                <option value="Within 2 weeks">Within 2 weeks</option>
+                                <option value="Within 1 month">Within 1 month</option>
+                                <option value="Within 3 months">Within 3 months</option>
+                                <option value="Flexible">Flexible</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="budget">Budget Range (Optional)</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select budget range...</option>
+                                <option value="Under $500">Under $500</option>
+                                <option value="$500 - $1,000">$500 - $1,000</option>
+                                <option value="$1,000 - $2,500">$1,000 - $2,500</option>
+                                <option value="$2,500 - $5,000">$2,500 - $5,000</option>
+                                <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                <option value="Over $10,000">Over $10,000</option>
+                                <option value="Need estimate">Need estimate</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-lg submit-btn">Submit Request</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Popup -->
+    <div id="success-popup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2>Request Submitted!</h2>
+            <p>Thank you for your service request. We will get back to you as soon as possible with a personalized quote and timeline.</p>
+            <button class="popup-close" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('service-request-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const form = this;
+            form.classList.add('loading');
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Create email content
+            const emailSubject = `New Service Request from ${data.firstName} ${data.lastName}`;
+            const emailBody = `
+New Service Request Details:
+
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Phone: ${data.phone}
+Address: ${data.address}
+
+Service Requested: ${data.service}
+Timeline: ${data.timeline || 'Not specified'}
+Budget: ${data.budget || 'Not specified'}
+
+Project Details:
+${data.details || 'No additional details provided'}
+
+---
+This request was submitted through the Nature's Touch website.
+            `.trim();
+
+            // Create mailto link
+            const mailtoLink = `mailto:williampopp2021@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Simulate form processing delay
+            setTimeout(() => {
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Remove loading state
+                form.classList.remove('loading');
+                
+                // Show success popup
+                document.getElementById('success-popup').style.display = 'flex';
+                
+                // Reset form
+                form.reset();
+            }, 1000);
+        });
+
+        function closePopup() {
+            document.getElementById('success-popup').style.display = 'none';
+        }
+
+        // Close popup when clicking outside
+        document.getElementById('success-popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopup();
+            }
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{0,3})/, '($1) $2');
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

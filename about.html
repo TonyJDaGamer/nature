@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Nature's Touch Landscaping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo span {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #22c55e;
+        }
+
+        .btn {
+            background: #16a34a;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: 2px solid #22c55e;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #15803d;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 4rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1604.jpg-Tj8sDepr9aY2XflHetr8cM0WOIdlZZ.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 3rem 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .content-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        .content-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #22c55e;
+        }
+
+        .content-text p {
+            font-size: 1.125rem;
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-image {
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            color: #d1d5db;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .team-member {
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: #22c55e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #16a34a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NaturesTouchlogo-RATt4ENSNxycGE5zieGdfTkIDsTavh.png" alt="Nature's Touch Logo">
+                    <span>Nature's Touch</span>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="index.html#contact" class="btn">Book Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>About Nature's Touch</h1>
+            <p>Dedicated to creating beautiful, sustainable outdoor spaces that enhance your property and lifestyle.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <a href="index.html" class="back-btn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to Home
+            </a>
+
+            <div class="content-section">
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h2>Our Mission</h2>
+                        <p>
+                            At Nature's Touch, we believe that every outdoor space has the potential to become a beautiful, functional extension of your home. Our mission is to transform ordinary landscapes into extraordinary outdoor living spaces that reflect your personal style and enhance your quality of life.
+                        </p>
+                        <p>
+                            We are committed to sustainable practices, using eco-friendly materials and techniques that not only beautify your property but also contribute to environmental conservation. Our team takes pride in delivering exceptional results while maintaining the highest standards of professionalism and customer service.
+                        </p>
+                    </div>
+                    <div class="content-image">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1541.jpg-m3YOPwi2J6Lf7NbNdbKrmj5Cv1iMU2.jpeg" alt="Professional landscaping work">
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">6+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Customer Satisfaction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Emergency Service</div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-image">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1546.jpg-x0323Z9L0s3tHKof3ITvAUyTSA7Oge.jpeg" alt="Landscape maintenance">
+                    </div>
+                    <div class="content-text">
+                        <h2>Our Approach</h2>
+                        <p>
+                            We understand that every property is unique, which is why we take a personalized approach to each project. Our process begins with a comprehensive consultation where we listen to your ideas, assess your space, and understand your budget and timeline.
+                        </p>
+                        <p>
+                            Our experienced team combines traditional landscaping knowledge with modern techniques and equipment to deliver results that exceed expectations. We use only high-quality materials and plants that are well-suited to the local climate and soil conditions.
+                        </p>
+                        <p>
+                            From initial design to final installation and ongoing maintenance, we're with you every step of the way to ensure your landscape continues to thrive for years to come.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 style="text-align: center; margin-bottom: 3rem; color: #22c55e; font-size: 2.5rem;">Our Services Include</h2>
+                    <div class="content-text">
+
+                        <h3>Lawn Care & Maintenance</h3>
+                        <p>Regular mowing, edging, fertilization, and seasonal care to keep your lawn healthy and beautiful throughout the year.</p>
+
+                        <h3>Tree & Shrub Services</h3>
+                        <p>Professional pruning, trimming, planting, and removal services to maintain the health and appearance of your trees and shrubs.</p>
+
+                        <h3>Hardscaping</h3>
+                        <p>Installation of patios, walkways, retaining walls, and other hardscape features that add functionality and beauty to your outdoor space.</p>
+
+                        <h3>Junk Removal</h3>
+                        <p>Professional removal of yard debris, old landscaping materials, and unwanted indoor & outdoor items to keep your property clean and organized.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 style="text-align: center; margin-bottom: 3rem; color: #22c55e; font-size: 2.5rem;">Meet Our Team</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="team-photo">QH</div>
+                            <h3>Quinlan Healy</h3>
+                            <p style="color: #22c55e; margin-bottom: 1rem;">Founder & Lead</p>
+                            <p>Started Natures Touch in 2018 and have been going strong since then.</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-photo">WP</div>
+                            <h3>William Popp</h3>
+                            <p style="color: #22c55e; margin-bottom: 1rem;">Operations Manager & Team Member</p>
+                            <p>In charge of managing schedules and your requests.</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-photo">AJ</div>
+                            <h3>Antonio Juarez</h3>
+                            <p style="color: #22c55e; margin-bottom: 1rem;">Technology Manager & Team Member</p>
+                            <p>Manages all website and domain systems.</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-photo">AP</div>
+                            <h3>Adam Presley</h3>
+                            <p style="color: #22c55e; margin-bottom: 1rem;">Team Member</p>
+                            <p></p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-photo">AP</div>
+                            <h3>Cameron Secor</h3>
+                            <p style="color: #22c55e; margin-bottom: 1rem;">Team Member</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 4rem;">
+                    <h2 style="color: #22c55e; margin-bottom: 2rem;">Ready to Transform Your Outdoor Space?</h2>
+                    <p style="font-size: 1.25rem; margin-bottom: 2rem; color: #d1d5db;">Contact us today for a free consultation and let's bring your vision to life.</p>
+                    <a href="index.html#contact" class="btn" style="padding: 1rem 2rem; font-size: 1.125rem;">Get Your Free Quote</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
